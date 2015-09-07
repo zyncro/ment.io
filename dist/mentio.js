@@ -956,8 +956,8 @@ angular.module('mentio')
                 if (mentionInfo !== undefined) {
                     if (selectedElementIsTextAreaOrInput()) {
                         var myField = getDocument(ctx).activeElement;
-                        text = text + ' ';
-                        text = '<input type="text" value="' + text + '" class="label-primary" zy-elastic-input disabled/>';
+                        // text = text + ' ';
+                        text = '<input type="text" value="' + text.name + '" urn="'+ text.urn +'" class="label-primary" zy-elastic-input disabled/>';
                         var startPos = mentionInfo.mentionPosition;
                         var endPos = mentionInfo.mentionPosition + mentionInfo.mentionText.length + 1;
                         myField.value = myField.value.substring(0, startPos) + text +
@@ -967,8 +967,8 @@ angular.module('mentio')
                     } else {
                         //TODO:: ***** Decorate *******
                         // add a space to the end of the pasted text
-                        text = ' ' + text + '\xA0';
-                        text = '<input type="text" value="' + text + '" class="label-primary" zy-elastic-input disabled/>';
+                        // text = ' ' + text + '\xA0';
+                        text = '<input type="text" value="' + text.name + '" urn="'+ text.urn +'" class="label-primary" zy-elastic-input disabled/>';
                         pasteHtml(ctx, text, mentionInfo.mentionPosition, mentionInfo.mentionPosition + mentionInfo.mentionText.length + 1, scope, targetElement);
                         //END TODO:: ***** Decorate *******
                     }
