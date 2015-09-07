@@ -966,9 +966,12 @@ angular.module('mentio')
                         myField.selectionEnd = startPos + text.length;
                     } else {
                         //TODO:: ***** Decorate *******
-                        // add a space to the end of the pasted text
-                        // text = ' ' + text + '\xA0';
-                        text = '<input type="text" value="' + text.name + '" urn="'+ text.urn +'" class="label-primary" zy-elastic-input disabled/>';
+                        if(text.urn){
+                             text = '<input type="text" value="' + text.name + '" urn="'+ text.urn +'" class="label-primary mention" zy-elastic-input disabled/>';
+                        }else{
+                             text = '<input type="text" value="' + text + '" class="label-primary hastag" zy-elastic-input disabled/>';
+                        }
+                       
                         pasteHtml(ctx, text, mentionInfo.mentionPosition, mentionInfo.mentionPosition + mentionInfo.mentionText.length + 1, scope, targetElement);
                         //END TODO:: ***** Decorate *******
                     }
