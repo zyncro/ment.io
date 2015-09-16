@@ -971,7 +971,7 @@ angular.module('mentio')
                         if(text.urn){
                                 text = '<input type="text" value="' + text.name + '" urn="'+ text.urn +'" notified="'+ text.notified +'" class="label-primary mention" zy-elastic-input disabled/>';
                         }else{
-                            text = '<input type="text" value="' + text + '" class="label-primary hashtag" zy-elastic-input disabled/>';
+                            text += ' ';
                         }
                        
                         pasteHtml(ctx, text, mentionInfo.mentionPosition, mentionInfo.mentionPosition + mentionInfo.mentionText.length + 1, scope, targetElement);
@@ -1322,10 +1322,6 @@ angular.module('mentio')
                 getMacroMatch: getMacroMatch,
                 getTriggerInfo: getTriggerInfo,
                 selectElement: selectElement,
-
-
-
-
                 // private: for unit testing only
                 getTextAreaOrInputUnderlinePosition: getTextAreaOrInputUnderlinePosition,
                 getTextPrecedingCurrentSelection: getTextPrecedingCurrentSelection,
