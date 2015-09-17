@@ -970,8 +970,6 @@ angular.module('mentio')
                         var notifiedClass ="";
                         if(text.urn){
                                 text = '<input type="text" value="' + text.name + '" urn="'+ text.urn +'" notified="'+ text.notified +'" class="label-primary mention" zy-elastic-input disabled/>';
-                        }else{
-                            text += ' ';
                         }
                        
                         pasteHtml(ctx, text, mentionInfo.mentionPosition, mentionInfo.mentionPosition + mentionInfo.mentionText.length + 1, scope, targetElement);
