@@ -945,6 +945,32 @@ angular.module('mentio')
                 }
             }
 
+      // function replaceTriggerText (ctx, targetElement, path, offset, triggerCharSet, 
+      //           text, requireLeadingSpace, hasTrailingSpace) {
+      //       resetSelection(ctx, targetElement, path, offset);
+
+      //       var mentionInfo = getTriggerInfo(ctx, triggerCharSet, requireLeadingSpace, true, hasTrailingSpace);
+
+      //       if (mentionInfo !== undefined) {
+      //           if (selectedElementIsTextAreaOrInput()) {
+      //               var myField = getDocument(ctx).activeElement;
+      //               text = text + ' ';
+      //               var startPos = mentionInfo.mentionPosition;
+      //               var endPos = mentionInfo.mentionPosition + mentionInfo.mentionText.length + 1;
+      //               myField.value = myField.value.substring(0, startPos) + text +
+      //                   myField.value.substring(endPos, myField.value.length);
+      //               myField.selectionStart = startPos + text.length;
+      //               myField.selectionEnd = startPos + text.length;
+      //           } else {
+      //               // add a space to the end of the pasted text
+      //               text = text + '\xA0';
+      //               pasteHtml(ctx, text, mentionInfo.mentionPosition,
+      //                       mentionInfo.mentionPosition + mentionInfo.mentionText.length + 1);
+      //           }
+      //       }
+      //   }
+
+
             // public
             function replaceTriggerText(ctx, targetElement, path, offset, triggerCharSet,
                 text, requireLeadingSpace, hasTrailingSpace, scope) {
@@ -971,7 +997,8 @@ angular.module('mentio')
                         if(text.urn){
                                 text = '<input type="text" value="' + text.name + '" urn="'+ text.urn +'" notified="'+ text.notified +'" class="label-primary mention" zy-elastic-input disabled/>';
                         }else{
-                            text += ' ';
+                           text = text + '\xA0\xA0';
+                           text = '<input type="text" value="' + text + '" notified="true" class="label-primary hastag" zy-elastic-input disabled/>';
                         }
                        
                         pasteHtml(ctx, text, mentionInfo.mentionPosition, mentionInfo.mentionPosition + mentionInfo.mentionText.length + 1, scope, targetElement);
