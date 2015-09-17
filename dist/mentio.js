@@ -210,39 +210,39 @@ angular.module('mentio', [])
                             }
                         );
 
-                        //TODO:: ***** Decorate *******
-                        function getCaret(element) {
-                            var caretOffset = 0;
-                            if (typeof window.getSelection != "undefined") {
-                                var range = window.getSelection().getRangeAt(0);
-                                var preCaretRange = range.cloneRange();
-                                preCaretRange.selectNodeContents(element);
-                                preCaretRange.setEnd(range.endContainer, range.endOffset);
-                                caretOffset = preCaretRange.toString().length;
-                            } else if (typeof document.selection != "undefined" && document.selection.type != "Control") {
-                                var textRange = document.selection.createRange();
-                                var preCaretTextRange = document.body.createTextRange();
-                                preCaretTextRange.moveToElementText(element);
-                                preCaretTextRange.setEndPoint("EndToEnd", textRange);
-                                caretOffset = preCaretTextRange.text.length;
-                            }
+                        // //TODO:: ***** Decorate *******
+                        // function getCaret(element) {
+                        //     var caretOffset = 0;
+                        //     if (typeof window.getSelection != "undefined") {
+                        //         var range = window.getSelection().getRangeAt(0);
+                        //         var preCaretRange = range.cloneRange();
+                        //         preCaretRange.selectNodeContents(element);
+                        //         preCaretRange.setEnd(range.endContainer, range.endOffset);
+                        //         caretOffset = preCaretRange.toString().length;
+                        //     } else if (typeof document.selection != "undefined" && document.selection.type != "Control") {
+                        //         var textRange = document.selection.createRange();
+                        //         var preCaretTextRange = document.body.createTextRange();
+                        //         preCaretTextRange.moveToElementText(element);
+                        //         preCaretTextRange.setEndPoint("EndToEnd", textRange);
+                        //         caretOffset = preCaretTextRange.text.length;
+                        //     }
 
-                            var elCont = element.innerHTML;
-                            var truncCont = elCont.substr(0, caretOffset);
+                        //     var elCont = element.innerHTML;
+                        //     var truncCont = elCont.substr(0, caretOffset);
 
-                            // console.log(range.endContainer.children);
-                            // console.log(range.commonAncestorContainer.parentElement.className);
+                        //     // console.log(range.endContainer.children);
+                        //     // console.log(range.commonAncestorContainer.parentElement.className);
 
-                            var returnValue = null;
-                            if (range.endContainer.children || document.getSelection().anchorNode.parentNode.className == "label label-primary") {
-                                returnValue = true;
-                            } else {
-                                returnValue = false;
-                            }
-                            return returnValue;
+                        //     var returnValue = null;
+                        //     if (range.endContainer.children || document.getSelection().anchorNode.parentNode.className == "label label-primary") {
+                        //         returnValue = true;
+                        //     } else {
+                        //         returnValue = false;
+                        //     }
+                        //     return returnValue;
 
-                        }
-                        //END TODO:: ***** Decorate *******
+                        // }
+                        // //END TODO:: ***** Decorate *******
 
                         $element.on(
                             'keydown keypress paste', function(event) {
@@ -258,7 +258,7 @@ angular.module('mentio', [])
                                     var range = window.getSelection().getRangeAt(0);
                                     if (table.children && range.endContainer.children) {
                                         //label-primary
-                                        var isHtml = getCaret($scope.targetElement);
+                                        // var isHtml = getCaret($scope.targetElement);
                                         // console.log(isHtml);
                                         var selectedItem = mentioUtil.getContentEditableSelectedPath($scope.context(), $scope.targetElement);
                                         if (table.children.length) {
