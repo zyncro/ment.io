@@ -995,10 +995,10 @@ angular.module('mentio')
                         //TODO:: ***** Decorate *******
                         var notifiedClass ="";
                         if(text.urn){
-                                text = '<input type="text" value="' + text.name + '" urn="'+ text.urn +'" notified="'+ text.notified +'" class="label-primary mention" zy-elastic-input disabled/>';
+                                text = '<input type="text" value="' + text.name + '" urn="'+ text.urn +'" notified="'+ text.notified +'" class="label-primary mention" zy-elastic-input disabled/> \xA0';
                         }else{
                            text = text + '\xA0\xA0';
-                           text = '<input type="text" value="' + text + '" notified="true" class="label-primary hastag" zy-elastic-input disabled/>';
+                           text = '<input type="text" value="' + text + '" notified="true" class="label-primary hastag" zy-elastic-input disabled/> \xA0';
                         }
                        
                         pasteHtml(ctx, text, mentionInfo.mentionPosition, mentionInfo.mentionPosition + mentionInfo.mentionText.length + 1, scope, targetElement);
