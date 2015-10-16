@@ -1240,19 +1240,32 @@ angular.module('mentio')
 
             function localToGlobalCoordinates(ctx, element, coordinates) {
                 var obj = element;
+                var modal = false;
                 var iframe = ctx ? ctx.iframe : null;
-                while (obj) {
+                while(obj) {
                     coordinates.left += obj.offsetLeft;
                     coordinates.top += obj.offsetTop;
                     if (obj !== getDocument().body) {
                         coordinates.top -= obj.scrollTop;
                         coordinates.left -= obj.scrollLeft;
+                        if (obj.className.indexOf("modal") > -1) {
+                            modal = true;
+                        }
                     }
                     obj = obj.offsetParent;
-                    if (!obj && iframe) {
+                    if (!obj && iframe) {                      
                         obj = iframe;
                         iframe = null;
                     }
+                }
+                if (modal) {
+                    obj = getDocument().body;
+                    while(obj) {
+                        coordinates.top += obj.offsetTop;
+                        coordinates.top += obj.scrollTop;
+                        obj = obj.offsetParent;
+                    }
+                    coordinates.top = coordinates.top - 178;
                 }
             }
 
