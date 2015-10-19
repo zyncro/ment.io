@@ -787,7 +787,7 @@ angular.module('mentio')
                         top: coordinates.top + 'px',
                         left: coordinates.left + 'px',
                         position: 'absolute',
-                        zIndex: 100,
+                        zIndex: 1055,
                         display: 'block'
                     });
 
