@@ -731,6 +731,14 @@ angular.module('mentio', [])
 
             element.bind('click', function() {
 
+                //Clear menu DOM
+                var x = document.querySelectorAll("[mentio-menu-item].active");
+                var i;
+                for (i = 0; i < x.length; i++) {
+                    if (x[i].parentNode) {
+                         x[i].parentNode.removeChild(x[i]);
+                    }
+                }
 
                 controller.selectItem(scope.item);
                 return false;
@@ -944,32 +952,6 @@ angular.module('mentio')
                     }
                 }
             }
-
-      // function replaceTriggerText (ctx, targetElement, path, offset, triggerCharSet, 
-      //           text, requireLeadingSpace, hasTrailingSpace) {
-      //       resetSelection(ctx, targetElement, path, offset);
-
-      //       var mentionInfo = getTriggerInfo(ctx, triggerCharSet, requireLeadingSpace, true, hasTrailingSpace);
-
-      //       if (mentionInfo !== undefined) {
-      //           if (selectedElementIsTextAreaOrInput()) {
-      //               var myField = getDocument(ctx).activeElement;
-      //               text = text + ' ';
-      //               var startPos = mentionInfo.mentionPosition;
-      //               var endPos = mentionInfo.mentionPosition + mentionInfo.mentionText.length + 1;
-      //               myField.value = myField.value.substring(0, startPos) + text +
-      //                   myField.value.substring(endPos, myField.value.length);
-      //               myField.selectionStart = startPos + text.length;
-      //               myField.selectionEnd = startPos + text.length;
-      //           } else {
-      //               // add a space to the end of the pasted text
-      //               text = text + '\xA0';
-      //               pasteHtml(ctx, text, mentionInfo.mentionPosition,
-      //                       mentionInfo.mentionPosition + mentionInfo.mentionText.length + 1);
-      //           }
-      //       }
-      //   }
-
 
             // public
             function replaceTriggerText(ctx, targetElement, path, offset, triggerCharSet,
