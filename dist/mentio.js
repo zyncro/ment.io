@@ -696,6 +696,7 @@ angular.module('mentio', [])
                 controller.selectItem(scope.item);
 
                 element.removeClass('active');
+                
                 //Clear menu DOM
                 var x = document.querySelectorAll("[mentio-menu-item].active");
                 var i;
