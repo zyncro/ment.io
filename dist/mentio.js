@@ -540,7 +540,8 @@ angular.module('mentio', [])
                 triggerChar: '=mentioTriggerChar',
                 forElem: '=mentioFor',
                 notified: '=notified',
-                parentScope: '=mentioParentScope'
+                parentScope: '=mentioParentScope',
+                mentioMenuStyle: '=?'
             },
             templateUrl: function(tElement, tAttrs) {
                 return tAttrs.mentioTemplateUrl !== undefined ? tAttrs.mentioTemplateUrl : 'mentio-menu.tpl.html';
@@ -645,7 +646,7 @@ angular.module('mentio', [])
                             var triggerCharSet = [];
                             triggerCharSet.push(scope.triggerChar);
                             mentioUtil.popUnderMention(scope.parentMentio.context(),
-                                triggerCharSet, element, scope.requireLeadingSpace);
+                                triggerCharSet, element, scope.requireLeadingSpace, scope.mentioMenuStyle);
                         }
                     }
                 );
@@ -668,7 +669,7 @@ angular.module('mentio', [])
                         var triggerCharSet = [];
                         triggerCharSet.push(scope.triggerChar);
                         mentioUtil.popUnderMention(scope.parentMentio.context(),
-                            triggerCharSet, element, scope.requireLeadingSpace);
+                            triggerCharSet, element, scope.requireLeadingSpace, scope.mentioMenuStyle);
                     }
                 });
 
@@ -777,7 +778,7 @@ angular.module('mentio')
         function($window, $location, $anchorScroll, $timeout, $compile) {
 
             // public
-            function popUnderMention(ctx, triggerCharSet, selectionEl, requireLeadingSpace) {
+            function popUnderMention(ctx, triggerCharSet, selectionEl, requireLeadingSpace, menuStyle) {
                 var coordinates;
                 var mentionInfo = getTriggerInfo(ctx, triggerCharSet, requireLeadingSpace, false);
 
@@ -791,13 +792,16 @@ angular.module('mentio')
                     }
 
                     // Move the button into place.
-                    selectionEl.css({
+                    var style = {
                         top: coordinates.top + 'px',
                         left: coordinates.left + 'px',
                         position: 'absolute',
                         zIndex: 1055,
                         display: 'block'
-                    });
+                    };
+
+                    angular.extend(style, menuStyle);
+                    selectionEl.css(style);
 
                     $timeout(function() {
                         scrollIntoView(ctx, selectionEl);
