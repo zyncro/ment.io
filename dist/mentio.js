@@ -210,40 +210,6 @@ angular.module('mentio', [])
                             }
                         );
 
-                        // //TODO:: ***** Decorate *******
-                        // function getCaret(element) {
-                        //     var caretOffset = 0;
-                        //     if (typeof window.getSelection != "undefined") {
-                        //         var range = window.getSelection().getRangeAt(0);
-                        //         var preCaretRange = range.cloneRange();
-                        //         preCaretRange.selectNodeContents(element);
-                        //         preCaretRange.setEnd(range.endContainer, range.endOffset);
-                        //         caretOffset = preCaretRange.toString().length;
-                        //     } else if (typeof document.selection != "undefined" && document.selection.type != "Control") {
-                        //         var textRange = document.selection.createRange();
-                        //         var preCaretTextRange = document.body.createTextRange();
-                        //         preCaretTextRange.moveToElementText(element);
-                        //         preCaretTextRange.setEndPoint("EndToEnd", textRange);
-                        //         caretOffset = preCaretTextRange.text.length;
-                        //     }
-
-                        //     var elCont = element.innerHTML;
-                        //     var truncCont = elCont.substr(0, caretOffset);
-
-                        //     // console.log(range.endContainer.children);
-                        //     // console.log(range.commonAncestorContainer.parentElement.className);
-
-                        //     var returnValue = null;
-                        //     if (range.endContainer.children || document.getSelection().anchorNode.parentNode.className == "label label-primary") {
-                        //         returnValue = true;
-                        //     } else {
-                        //         returnValue = false;
-                        //     }
-                        //     return returnValue;
-
-                        // }
-                        // //END TODO:: ***** Decorate *******
-
                         $element.on(
                             'keydown keypress paste', function(event) {
 
@@ -251,7 +217,7 @@ angular.module('mentio', [])
 
                                 //TODO:: ***** Decorate *******
                                 var key = event.keyCode || event.charCode;
-                                if (key == 8 || key == 46) {
+                                if (key == 8) {
                                     var table = $element[0];
                                     var nextNode = table.nextSibling;
                                     var parent = table.parentNode;
@@ -268,11 +234,6 @@ angular.module('mentio', [])
 
 
                                 }
-
-
-                                //END TODO:: ***** Decorate *******
-
-
 
                                 if (activeMenuScope) {
                                     if (event.which === 9 || event.which === 13) {
@@ -899,7 +860,7 @@ angular.module('mentio')
                 var el = getDocument(ctx).createElement('div');
                 el.innerHTML = html;
 
-                //TODO:decorator                
+                //TODO:decorator
                 $compile(el)(scope);
 
                 var frag = getDocument(ctx).createDocumentFragment(),
@@ -981,12 +942,12 @@ angular.module('mentio')
                         //TODO:: ***** Decorate *******
                         var notifiedClass ="";
                         if(text.urn){
-                                text = '<input type="text" value="' + text.name + ' '+ text.lastName + '" urn="'+ text.urn +'" notified="'+ text.notified +'" class="label-primary mention" zy-elastic-input disabled/>\xA0';                                 
+                                text = '<input type="text" value="' + text.name + ' '+ text.lastName + '" urn="'+ text.urn +'" notified="'+ text.notified +'" class="label-primary mention" zy-elastic-input disabled/>\xA0';
                         }else{
                            // text = text + '\xA0\xA0';
                            text = '<input type="text" value="' + text + '" notified="true" class="label-primary hastag" zy-elastic-input disabled/>\xA0';
                         }
-                       
+
                         pasteHtml(ctx, text, mentionInfo.mentionPosition, mentionInfo.mentionPosition + mentionInfo.mentionText.length + 1, scope, targetElement);
                         //END TODO:: ***** Decorate *******
                     }
@@ -1092,7 +1053,7 @@ angular.module('mentio')
             // public
             function getTriggerInfo(ctx, triggerCharSet, requireLeadingSpace, menuAlreadyActive, hasTrailingSpace) {
                 /*jshint maxcomplexity:11 */
-                // yes this function needs refactoring 
+                // yes this function needs refactoring
                 var selected, path, offset;
                 if (selectedElementIsTextAreaOrInput(ctx)) {
                     selected = getDocument(ctx).activeElement;
@@ -1239,7 +1200,7 @@ angular.module('mentio')
                         }
                     }
                     obj = obj.offsetParent;
-                    if (!obj && iframe) {                      
+                    if (!obj && iframe) {
                         obj = iframe;
                         iframe = null;
                     }
