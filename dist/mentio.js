@@ -738,6 +738,36 @@ angular.module('mentio')
     .factory('mentioUtil', ["$window", "$location", "$anchorScroll", "$timeout", "$compile",
         function($window, $location, $anchorScroll, $timeout, $compile) {
 
+            // re-calculate the coordinates taking
+            // care don't pop-out of window.
+            function overflowCoordinates(selectionEl, position) {
+
+                var $el = selectionEl[0].lastElementChild;
+                
+                // horizontal
+                if ((position.left + $el.offsetWidth) >= window.innerWidth) {
+                    position.left = window.innerWidth - $el.offsetWidth - 10;
+                }
+                // vertical
+                if ((position.top + $el.offsetHeight) >= window.innerHeight) {
+                    position.top = window.innerHeight - $el.offsetHeight - 10;
+                }
+                return position;
+            }
+
+            // builds the styles object extending menuStyle
+            function getStyle(coordinates, menuStyle) {
+                // Move the button into place.
+                var style = {
+                    top: coordinates.top + 'px',
+                    left: coordinates.left + 'px',
+                    position: 'absolute',
+                    zIndex: 1055,
+                    display: 'block'
+                };
+                return angular.extend(style, menuStyle);
+            }
+
             // public
             function popUnderMention(ctx, triggerCharSet, selectionEl, requireLeadingSpace, menuStyle) {
                 var coordinates;
@@ -751,19 +781,8 @@ angular.module('mentio')
                     } else {
                         coordinates = getContentEditableCaretPosition(ctx, mentionInfo.mentionPosition);
                     }
-
-                    // Move the button into place.
-                    var style = {
-                        top: coordinates.top + 'px',
-                        left: coordinates.left + 'px',
-                        position: 'absolute',
-                        zIndex: 1055,
-                        display: 'block'
-                    };
-
-                    angular.extend(style, menuStyle);
-                    selectionEl.css(style);
-
+                    selectionEl.css(getStyle(coordinates, {display:'block'}));
+                    selectionEl.css(getStyle(overflowCoordinates(selectionEl, coordinates), menuStyle));
                     $timeout(function() {
                         scrollIntoView(ctx, selectionEl);
                     }, 0);
